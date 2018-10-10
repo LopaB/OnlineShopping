@@ -1,0 +1,303 @@
+<div class="container">
+    <div class="row" ng-init="userCtrl.fetchUser()">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li ><a href="#!/edit/profile" role="tab" data-target="#picture" data-toggle="tab"><span class="glyphicon glyphicon-upload"></span> Upload Profile Picture</a></li>
+                        <li class="active"><a href="#!/userProfile" role="tab" data-target="#info" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> User Profile Information</a></li>
+                    </ul>
+                </div>
+                <!-- Tab panes -->
+                <div class="panel-body ">
+                    <div class="tab-content ">              
+                        <div class="tab-pane active" id="info ">
+                            <div class="row " >    
+                                <!--For quick preview of user on the left side-->
+                                <div class="col-md-6" style="margin-left: 25px; margin-bottom: 50px;padding-bottom: 5%; padding-left:5%; padding-right:5%;border:2px solid #A9A9A9; border-radius:5px;box-shadow: 5px 5px lightslategray">
+
+                                <!--User profile picture-->
+                                    <div class="display-photo" style=" margin-top: 25px;">
+                                        <img ng-src="./assets/images/{{user.profile}}" alt="" class="img-circle" width="200px;" height="200px"  />
+                                    </div>
+
+                                    <!--user's Basic info-->
+                                    <h4>{{user.fullname}}</h4>
+                                    <h6>@ {{user.username}}</h6>
+                                    <p>{{user.email}}</p>
+                                
+                                    <p ng-if="user.gender == 'M'">Male</p>
+                                    <p ng-if="user.gender == 'F'">Female</p>
+                                    <p ng-if="user.role != 'USER' && user.role != 'ADMIN'">Role: {{user.role}}</p>
+                                    <p ng-if="user.role == 'ADMIN'">Role: ADMIN</p>
+
+                                    <!--For sending friend request and message-->
+                                    <div class="row" ng-if="user.userId != user.userId">
+                                        <div class="col-md-6">
+                                            <a class="btn btn-warning">BEFRIEND</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a class="btn btn-warning">Message</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5" style="margin-left: 30px; margin-bottom: 50px;padding-bottom: 5%; padding-left:5%; padding-right:5%;border:2px solid #A9A9A9; border-radius:5px;box-shadow: 5px 5px lightslategray">
+                                    <!--User's Friendlist is shown here-->
+                                    <div style="margin-top: 20px;" ng-init="userCtrl.fetchMyFriends()">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <span class="">Friends (Total {{userCtrl.friendsCount}})<a></a></span>
+                                            </div>
+                                            
+                                        </div>
+                                        <ul class="collection">
+                                        <li class="collection-item avatar" ng-repeat="friend in userCtrl.myFriends">
+                                            <img src="./assets/images/{{friend.profile}}" alt="" class="img-circle" width="100" height="100">
+                                            <span><a href="#!/user/profile/{{friend.userId}}" style="color:black">{{friend.username}}</a></span>
+                                            <a href="#!" class="secondary-content tooltipped" data-position="bottom" data-delay="50" data-tooltip="message"><i class="">message</i></a>
+                                        </li>
+
+                                    
+                                        </ul>
+                                    </div>
+        
+                                </div>
+
+                            </div>
+                                <!--Detail info of user, blogs, topics, event and job created by him are shown on the right side of page-->
+                                
+                                <div class="row">
+                                   
+                                        <!--User profile, jobs and events created will come here -->
+                                        <div id="test1" class="col-md-11" style="margin-left: 25px; margin-bottom: 50px;padding-bottom: 5%; padding-left:5%; padding-right:5%;border:2px solid #A9A9A9; border-radius:5px;box-shadow: 5px 5px lightslategray">
+                                            <div style="margin-top: 25px;">   
+                                                <h4><i>  Basic Info :&nbsp;</i> </h4> 
+                                                <hr style="width:750">
+                                                
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div style="margin-left: 20px; margin-top: 20px;">
+                                                            <h6>Name: {{user.fullname}}</h6>
+                                                            <h6>Username: {{user.username}}</h6>
+                                                           
+                                                            <h6 ng-if="user.gender == 'M'">Gender: Male</h6>
+                                                            <h6 ng-if="user.gender == 'F'">Gender: Female</h6>
+                                                            <h6>Email Id: {{user.email}}</h6>
+                                                            <h6>Contact No: </h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div>
+                                                            <a class="btn btn-lg tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit" data-target="#updateProfile" data-toggle="modal" ><i class="fa fa-pencil-square-o fa" aria-hidden="true"> edit</i></a>
+                                                            <a class="btn btn-lg tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete" ng-click="userCtrl.deleteUser(user.userId)"><i class="fa fa-close fa" aria-hidden="true"> deactivate</i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- modal for update profile-->
+                                         <div id="updateProfile" class="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content" >
+                                                    <div class="modal-header">
+                                                        <h4>Update Profile</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <form id="updateUser" name="updateUser" ng-submit="userCtrl.updateUser()"  style="margin-bottom: 50px;">
+                                                                    <input type="hidden" ng-model="userCtrl.user.userId" />
+                                                                    <input type="hidden" ng-model="userCtrl.user.username" />
+                                                                    <input type="hidden" ng-model="userCtrl.user.role" />                                                                    
+                                                                    <input type="hidden" ng-model="userCtrl.user.gender" />
+                                                                    <input type="hidden" ng-model="userCtrl.user.profile" />
+                                                                    <input type="hidden" ng-model="userCtrl.user.status" />
+                                                                    <input type="hidden" ng-model="userCtrl.user.isOnline" />
+                                                                    <input type="hidden" ng-model="userCtrl.user.enabled" />
+
+                                                                    <div class="row">
+                                                                        <div class="form-group col-md-12">
+                                                                            <input id="email" type="text" class="form-control validate" ng-model="userCtrl.user.email" value="{{userCtrl.user.email}}">
+                                                                            <label for="email">User Email</label>
+                                                                        </div>
+                                                                        <div class="invalid-data" ng-show="updateUser.email.$dirty">
+                                                                            <p style="color:red" ng-show="updateUser.email.$error.required && !updateUser.email.$pristine" class="help-block">email is mandatory</p>
+                                                                            <p style="color:red" ng-show="updateUser.email.$invalid && !updateUser.email.$pristine" class="help-block">Enter a valid email</p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <div class="form-group col-md-12">
+                                                                            <input id="password" type="password" class="form-control validate" ng-model="userCtrl.user.password" value="{{userCtrl.user.password}}">
+                                                                            <label for="password">User Password</label>
+                                                                        </div>
+                                                                        <div class="invalid-data" ng-show="updateUser.password.$dirty">
+                                                                            <p style="color:red" ng-show="updateUser.password.$error.required && !updateUser.password.$pristine" class="help-block">password is mandatory</p>
+                                                                            <p style="color:red" ng-show="updateUser.password.$error.minlength" class="help-block">password must be of at least 4 characters</p>
+                                                                            <p style="color:red" ng-show="updateUser.password.$error.maxlength" class="help-block">password is too long</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="row">
+                                                                        <div class="form-group col-md-12">
+                                                                            <input id="confirmpassword" type="password" class="form-control validate" ng-model="userCtrl.user.confirmpassword" value="{{userCtrl.user.confirmpassword}}" ng-class="{ 'confirmpassword' : (userCtrl.user.password !== userCtrl.user.confirmpassword)}"/>
+                                                                            <label for="confirmpassword">User Password</label>
+                                                                        </div>
+                                                                        <div class="invalid-data" ng-show="updateUser.reg_username.$dirty">
+                                                                            <p style="color:red" ng-show="updateUser.confirmpassword.$error.required && !updateUser.confirmpassword.$pristine" class="help-block">password is mandatory</p>
+                                                                            <p style="color:red" ng-show="(!updateUser.confirmpassword.$error.required) && (userCtrl.user.password !== userCtrl.user.confirmpassword)"
+                                                                                class="help-block">Password do not match</p>
+                                                                        </div>
+                                                                    </div>
+                                                                                                                            
+
+                                                                    <div class="row">
+                                                                        <div class="form-group col-md-12">
+                                                                            <button type="submit" class="btn btn-primary" style="margin-top: 10px; left: 20px;">Update</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- modal for deactivate profile-->
+                                   </div> 
+                                    <div class="row">     
+                                        <!--Blogs created by user will come here -->
+                                        <div id="test2" class="col-md-11" style="margin-left: 25px; margin-bottom: 50px;padding-bottom: 5%; padding-left:5%; padding-right:5%;border:2px solid #A9A9A9; border-radius:5px;box-shadow: 5px 5px lightslategray">
+                                                <h4><i>  Blogs :&nbsp;</i> </h4> 
+                                                <hr style="width:750">
+                                                <div ng-if="userCtrl.myBlogCount == 0" class="row" >                                                   
+                                                     
+                                                    <div class="col-md-12" style="margin-left: 180px; ">
+                                                        <h5 ng-if="user.userId != user.userId"style="margin-top: 150px;">{{user.username}} has created any blogs yet!</h5> 
+                                                        <h5 ng-if="user.userId == user.userId"style="margin-top: 150px;">You have not created any blogs yet!</h5> 
+                                                        <a ng-if="user.userId == user.userId" href="#!/blog/new" type="submit" style="margin-left: 120px;" class="waves-effect waves-light btn-large center-align">CREATE NEW BLOG</a>
+                                                    </div>
+                                                </div>
+
+                                                <div ng-if="userCtrl.myBlogCount != 0" class="row">
+                                                    
+                                                    <div class="col-md-6" ng-repeat="blogs in userCtrl.blog" style=" padding-left:5%; padding-right:5% ; height: 20%">
+                                                        <div class="row"  >
+                                                        <div class="col-md-12"  style="border:2px solid #A9A9A9; border-radius:5px;box-shadow: 5px 5px lightslategray">
+                                                            <span class="" style="margin-left: 10px; font-weight: bolder"><a href="#!/blog/{{blogs.blogId}}" style=" color: rgba(0, 0, 0, 0.87);">{{blogs.blogTitle}}</a></span>
+                                                            <div style="margin-left: 10px;">
+                                                                <p class="truncate">{{blogs.blogContent}}</p>
+                                                            </div>
+                                                            <div class="">
+                                                                <a href="javascript:void(0)" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="views">Views {{blogs.noOfViews}}</a>
+                                                                &nbsp; &nbsp; &nbsp;
+                                                                <a href="javascript:void(0)" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="likes">Likes {{blogs.noOfLikes}}</a>
+                                                                &nbsp; &nbsp; &nbsp;
+                                                                <a href="javascript:void(0)" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="comments">Comments {{blogs.noOfComments}}</a>    
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>                    
+                                            </div>
+                                    </div>
+                                    <div class="row"> 
+                                        <!--All Events joined by user will come here -->
+                                        <div id="test3" class="col-md-11" style="margin-left: 25px; margin-bottom: 50px;padding-bottom: 5%; padding-left:5%; padding-right:5%;border:2px solid #A9A9A9; border-radius:5px;box-shadow: 5px 5px lightslategray">
+                                             <h4><i>  Events :&nbsp;</i> </h4> 
+                                             <hr style="width:750">
+                                             <div  ng-if="userCtrl.joinedEventCount == 0" class="row" style="">                                                
+                                                <div class="col-md-12" style="margin-left: 180px; ">
+                                                    <h5 ng-if="user.userId != user.userId"style="margin-top: 150px;">{{user.username}} has not joined any events yet!</h5> 
+                                                    <h5 ng-if="user.userId == user.userId"style="margin-top: 150px;">You have not joined any events yet!</h5> 
+                                                    <a ng-if="user.userId == user.userId" href="#!/events/list" type="submit" style="margin-left: 120px;" class="waves-effect waves-light btn-large center-align">SEARCH FOR EVENTS</a>
+                                                </div>
+                                            </div>
+
+                                            <div ng-if="userCtrl.joinedEventCount != 0" class="row" style="width: inherit;" >
+                                                <div class="col-md-6" ng-repeat="event in userCtrl.user.joinedEvents">
+                                                  <div class="row"  >
+                                                      <div class="col-md-12" style="border:2px solid #A9A9A9; border-radius:5px;box-shadow: 5px 5px lightslategray">
+                                                        <span style="margin-left: 10px; font-weight: bolder"><a href="#!/event/{{event.id}}" style=" color: rgba(0, 0, 0, 0.87);">{{event.name}}</a></span>
+                                                        <p style="font-size: 13px;">Organised by {{event.username}} | {{event.postDate | date: 'MMMM, d y'}}</p><br>
+                                                        <p>{{event.description}}</p>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <p><b>Venue</b></p>
+                                                                <p>{{event.venue}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <p><b>Start Date</b> {{event.startDate | date: 'MMMM, d y'}}</p>
+                                                                <p><b>End Date</b> {{event.endDate | date: 'MMMM, d y'}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>                                           
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">                                        
+                                    <!--All jobs applied by user will come here -->
+                                    <div id="test4" class="col-md-11" style="margin-left: 25px; margin-bottom: 50px;padding-bottom: 5%; padding-left:5%; padding-right:5%;border:2px solid #A9A9A9; border-radius:5px;box-shadow: 5px 5px lightslategray">
+                                        <h4><i>  Jobs :&nbsp;</i> </h4> 
+                                        <hr style="width:750">
+                                        <div ng-if="userCtrl.appliedJobCount == 0" class="row" style="width: inherit; ">
+                                                
+                                            <div class="col-md-12" style="margin-left: 180px; ">
+                                                <h5 style="margin-top: 150px;" ng-if="user.userId != user.userId">{{user.username}} has not applied for any jobs yet!</h5> 
+                                                <h5 style="margin-top: 150px;" ng-if="user.userId == user.userId">You have not applied for any jobs yet!</h5> 
+                                                <a ng-if="user.userId == user.userId" href="#!/jobs/list" type="submit" style="margin-left: 150px;" class="waves-effect waves-light btn-large center-align">SEARCH FOR JOBS</a>
+                                            </div>
+                                        </div>
+                                        <div ng-if="userCtrl.appliedJobCount != 0" class="row" style=" padding-left:5%; padding-right:5% ; height: 20%" >
+                                            <div class="col-md-6" ng-repeat="job in userCtrl.user.appliedJobList" >
+                                                <div class="row">
+                                                    <div class="col-md-12" style="border:2px solid #A9A9A9; border-radius:5px;box-shadow: 5px 5px lightslategray">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <h5><b>{{job.companyName}}</b></h5>
+                                                                <h6>{{job.subTitle}}</h6>
+                                                                <b>About The Company</b>
+                                                                <p>{{job.about}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <hr style="width:300px">
+                                                        <div class="row">                                                            
+                                                            <div class="col-md-12">
+                                                                <b>JOB PROFILE</b>
+                                                                <p>{{job.jobProfile}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <b>QUALIFICATION</b>
+                                                                <p>{{job.qualification}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <b>CONTACT INFO</b>
+                                                                <p>{{job.contactInfo}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                                               
+                                        </div>
+                                    </div>
+                                </div>
+                        <!-- -->                                   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

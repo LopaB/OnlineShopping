@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                       <li><a href="#!/forum/list" role="tab" data-target="#view" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> View Forums</a></li>
+                        <li><a href="#!/requests/forums" ng-if="user.role=='ADMIN'" role="tab" data-target="#request" data-toggle="tab"><span class="glyphicon glyphicon-bitcoin"></span> Approve Forum</a></li>
+                        <li  class="active"><a href="#!/manage/forums" ng-if="user.role=='ADMIN'" role="tab" data-target="#manage" data-toggle="tab"><span class="glyphicon glyphicon-bitcoin"></span> Manage Forum</a></li>
+                    </ul>
+                </div>
+            <!-- Tab panes -->
+            <div class="panel-body ">
+                <div class="tab-content ">
+                    <div class="tab-pane active" id="manage ">
+                        <div class="row" ng-init="forumCtrl.manageForums()">
+  
+                            <div style="margin-top: 25px; margin-left: 25px;">
+                                <h5>Manage Forums here...</h5>
+                            </div>
+                            <br /> <br />
+
+                            <div class="table-responsive" style="margin-left: 25px; margin-bottom: 250px;">
+                                <table class="table">
+                                    <thead>
+                                        <tr>                                            
+                                            <th data-field="name">Forum Name</th>
+                                            <th data-field="postDate">Post Date</th>
+                                            <th data-field="username">Posted By</th>                                           
+                                            <th data-field="status">Options</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr ng-repeat="forum in forumCtrl.approvedForumsList">                                           
+                                            <td><a href="#!/forum/{{forum.id}}" >{{forum.name}}</a></td>
+                                            <td>{{forum.postDate | date: 'MMMM d, y'}}</td>
+                                             <td>{{forum.username}}</td>
+                                            <td>                     
+                                                <a class="btn btn-lg tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit" data-target="#updateForum" data-toggle="modal" ><i class="fa fa-pencil-square-o fa" aria-hidden="true"> edit</i></a>
+                                                <a class="btn btn-lg tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete" ng-click="forumCtrl.deleteForum(forum.id)"><i class="fa fa-close fa" aria-hidden="true"> delete</i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Modal Structure for updating forum -->
+                                        <div id="updateForum" class="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content" >
+                                                    <div class="modal-header">
+                                                        <h4>Update Forum</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <form id="updateForum" name="updateForum" ng-submit="forumCtrl.updateForum()"  style="margin-bottom: 50px;">
+                                                                    <input type="hidden" ng-model="forumCtrl.Forum.id" />
+
+                                                                    <div class="row">
+                                                                        <div class="form-group col-md-12">
+                                                                            <input id="name" type="text" class="form-control validate" ng-model="forumCtrl.Forum.name" value="forumCtrl.Forum.name">
+                                                                            <label for="name">Forum Name</label>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">                                                                        
+                                                                        <div class="form-group col-md-12">
+                                                                            <textarea id="comment" class="form-control" ng-model="forumCtrl.Forum.description" value="forumCtrl.Forum.description"></textarea>
+                                                                            <label for="comment">Comment</label>
+                                                                        </div>
+                                                                    </div>                                                                   
+
+                                                                    <div class="row">
+                                                                        <div class="form-group col-md-12">
+                                                                            <button type="submit" class="btn btn-primary" style="margin-top: 10px; left: 20px;">Update</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end of modal -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div></div>

@@ -1,0 +1,67 @@
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li ><a href="#!/viewUsers" role="tab" data-target="#view" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> View Users</a></li>
+                        <li class="active"><a href="#!/requests/users" role="tab" data-target="#activate" data-toggle="tab"><span class="glyphicon glyphicon-user" ></span> Activate Users</a></li>
+                        <li><a href="#!/requests/blogs" role="tab" data-target="#activateBlog" data-toggle="tab"><span class="glyphicon glyphicon-biticon"></span> Activate Blog</a></li>
+                        
+                    </ul>
+                </div>
+                <!-- Tab panes -->
+                <div class="panel-body ">
+                    <div class="tab-content ">      
+                        <div class="tab-pane active" id="activate " >
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row" ng-init="requestCtrl.pendingUserList()">
+                                        <div style="margin-top: 25px; margin-left: 25px;">
+                                            <h5>New User Requests</h5>
+                                        </div>
+                                        <br /> <br />
+
+                                        <div style="margin-left: 25px; margin-bottom: 250px;" class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-field="userId">User Id</th>
+                                                        <th data-field="username">Username</th>
+                                                        <th data-field="fullname">Full Name</th>
+                                                        <th data-field="email">Email Id</th>
+                                                        <th data-field="gender">Gender</th>
+                                                        <th data-field="status">Status</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr ng-repeat="user in requestCtrl.pendingUsers | orderBy : 'user.userId'">
+                                                        <td>{{user.userId}}</td>
+                                                        <td>{{user.username}}</td>
+                                                        <td>{{user.fullname}}</td>
+                                                        <td>{{user.email}}</td>
+                                                        <td>{{user.gender}}</td>                        
+                                                        <td> 
+                                                            <div class="">                            
+                                                                <input type="button" value="Activate" ng-click="requestCtrl.changeStatus(user.userId)">                           
+                                                            </div>
+                                                        </td>                        
+                                                    </tr>                
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

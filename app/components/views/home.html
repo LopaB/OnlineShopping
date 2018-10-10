@@ -1,0 +1,218 @@
+<div class="container">
+    <div class="row" style="border: 2px solid darkblue;border-radius: 2px">
+        <div class="col-md-12" height="5%">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>Get started with your Collaboration World</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3" >
+                    <div class="thumbnail">
+                        <img src="./assets/images/blog.jpg" alt="" >
+                        <div class="caption">
+                            <h3>Blog</h3>
+                            <p></p>
+                            <p>
+                                <a href="#!/blog" class="btn btn-primary">Visit Your Blog Page</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" >
+                    <div class="thumbnail">
+                        <img src="./assets/images/forum.png" alt="">
+                        <div class="caption">
+                            <h3>Forum</h3>
+                            <p></p>
+                            <p>
+                                <a href="#!/forum/list" class="btn btn-primary">Visit Your Forum Page</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" >
+                    <div class="thumbnail">
+                        <img src="./assets/images/profile.jpg" alt="" style="border-radius: 45px">
+                        <div class="caption">
+                            <h3>Profile</h3>
+                            <p></p>
+                            <p>
+                                <a href="#!/edit/profile" class="btn btn-primary">Visit Your Profile Page</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" >
+                    <div class="thumbnail">
+                        <img src="./assets/images/friend.jpg" alt="" style="border-radius: 45px">
+                        <div class="caption">
+                            <h3>Friends</h3>
+                            <p></p>
+                            <p>
+                                <a href="#!/member/list" class="btn btn-primary">Visit Your Friend Page</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
+        <div class="col-md-12" style="background-color: #DCDCDC; height: 2%; margin-bottom:2%">
+        </div>
+        
+       
+            <div class="col-md-12" ng-init="userCtrl.fetchContain()">                    
+                <div class="row">
+                    <!--Top 5 bolgs -->
+                    <div class="col-md-12">
+                        <div class="thumbnail">
+                            <div>
+                                <h3 style="padding-left:5%">Top 5 Blogs...</h3>
+                                    <div  class="row">                                                    
+                                        <div class="col-md-6" ng-repeat="blogs in userCtrl.top5Blogs | filter : containSearch" style=" padding-left:5%; padding-right:5% ;padding-bottom:2% ">
+                                            <div class="row"  >
+                                                <div class="col-md-12"  style="border:2px solid #A9A9A9; border-radius:5px;box-shadow: 5px 5px lightslategray">
+                                                    <span class="" style="margin-left: 10px; font-weight: bolder"><a href="#!/blog/{{blogs.blogId}}" style=" color: rgba(0, 0, 0, 0.87);">{{blogs.blogTitle}}</a></span>
+                                                    <div style="margin-left: 10px;">
+                                                        <p class="truncate">{{blogs.blogContent}}</p>
+                                                    </div>
+                                                    <div class="">
+                                                        <a href="javascript:void(0)" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="views">Views {{blogs.noOfViews}}</a>
+                                                        &nbsp; &nbsp; &nbsp;
+                                                        <a href="javascript:void(0)" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="likes">Likes {{blogs.noOfLikes}}</a>
+                                                        &nbsp; &nbsp; &nbsp;
+                                                        <a href="javascript:void(0)" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="comments">Comments {{blogs.noOfComments}}</a>    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <br/>
+                                    <a href="#!/blogs/list" class="center-align" style="padding-left:5%">View All</a>  
+                                          
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+            </div>
+                        <!-- Top 3 jobs -->
+                   
+                        <div class="col-md-12">
+                            <div class="thumbnail">
+                                <div>
+                                    <h3 style="padding-left:5%">Top 3 Jobs ...</h3>
+                                    <div class="row"  >
+                                            <div class="col-md-6" ng-repeat="job in userCtrl.top3Jobs | filter : containSearch" style=" padding-left:5%; padding-right:5% ;padding-bottom:2% ">
+                                                <div class="row">
+                                                    <div class="col-md-12" style="border:2px solid #A9A9A9; border-radius:5px;box-shadow: 5px 5px lightslategray">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <h5><b>{{job.companyName}}</b></h5>
+                                                                <h6>{{job.subTitle}}</h6>
+                                                                <b>About The Company</b>
+                                                                <p>{{job.about}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <hr style="width:300px">
+                                                        <div class="row">                                                            
+                                                            <div class="col-md-12">
+                                                                <b>JOB PROFILE</b>
+                                                                <p>{{job.jobProfile}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <b>QUALIFICATION</b>
+                                                                <p>{{job.qualification}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <b>CONTACT INFO</b>
+                                                                <p>{{job.contactInfo}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                                               
+                                        </div>
+                                        <br/>
+                                        <a href="#!/jobs/list" class="center-align" style="padding-left:5%">View All</a>
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Top 3 events -->
+                    
+                        <div class="col-md-12">
+                            <div class="thumbnail">
+                                <div>
+                                    <h3 style="padding-left:5%">Top 3 Events ...</h3>
+                                            <div class="row">
+                                                <div class="col-md-6" ng-repeat="event in userCtrl.contain.top3Events | filter : containSearch" style=" padding-left:5%; padding-right:5% ;padding-bottom:2% ">
+                                                  <div class="row"  >
+                                                      <div class="col-md-12" style="border:2px solid #A9A9A9; border-radius:5px;box-shadow: 5px 5px lightslategray">
+                                                        <span style="margin-left: 10px; font-weight: bolder"><a href="#!/event/{{event.id}}" style=" color: rgba(0, 0, 0, 0.87);">{{event.name}}</a></span>
+                                                        <p style="font-size: 13px;">Organised by {{event.username}} | {{event.postDate | date: 'MMMM, d y'}}</p><br>
+                                                        <p>{{event.description}}</p>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <p><b>Venue</b></p>
+                                                                <p>{{event.venue}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <p><b>Start Date</b> {{event.startDate | date: 'MMMM, d y'}}</p>
+                                                                <p><b>End Date</b> {{event.endDate | date: 'MMMM, d y'}}</p>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>                                           
+                                            </div>
+                                            </div>
+                                            <br/>
+                                            <a href="#!/events/list" class="center-align" style="padding-left:5%">View All</a>
+                                          
+                                </div>
+                            </div>
+                        </div>
+                    
+                         <!-- Top 3 Forums -->
+                  
+                        <div class="col-md-12" style="margin-bottom:5%">
+                            <div class="thumbnail">
+                                <div>
+                                    <h3 style="padding-left:5%">Top 3 Forums ...</h3>
+                                    <div class="row" style="width: inherit;" >
+                                                <div class="col-md-6" ng-repeat="forums in userCtrl.top3Forums | filter : containSearch" style=" padding-left:5%; padding-right:5% ;padding-bottom:2% ">
+                                                  <div class="row"  >
+                                                      <div class="col-md-12" style="border:2px solid #A9A9A9; border-radius:5px;box-shadow: 5px 5px lightslategray">
+                                                        <span style="margin-left: 10px; font-weight: bolder"><a href="#!/forums/{{forums.id}}" style=" color: rgba(0, 0, 0, 0.87);">{{forums.name}}</a></span>
+                                                        <br/>
+                                                        <p>{{forums.description}}</p>
+                                                        <br/>
+                                                         
+                                                        
+                                                        
+                                                    </div>
+                                                </div>                                           
+                                            </div>
+                                        </div>
+                                        <br/>
+                                       <a href="#!/forum/list" class="center-align" style="padding-left:5%">View All</a>
+                                      
+                                </div>
+                            </div>
+                        </div>
+                  <br/><br/>
+                </div>
+            </div>
+          
+
+        
+        
+   

@@ -1,0 +1,56 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#!/blog" role="tab" data-target="#view" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> View Blog</a></li>
+                        <li><a href="#!/myblog" role="tab" data-target="#myblog" data-toggle="tab"><span class="glyphicon glyphicon-list-alt" ></span> My Blog</a></li>
+                        <li><a href="#!/createblog" role="tab" data-target="#create" data-toggle="tab"><span class="glyphicon glyphicon-pencil"></span> Create Blog</a></li>
+                        <li><a href="#!/manageblog" role="tab" data-target="#manage" data-toggle="tab"  ng-if="user.role=='ADMIN'"><span class="glyphicon glyphicon-wrench"></span> Manage Blog</a></li>
+                    </ul>
+                </div>
+                <!-- Tab panes -->
+                <div class="panel-body ">
+                    <div class="tab-content ">              
+                        <div class="tab-pane active" id="view ">
+                            <div class=" ">
+                                <div class="row well">
+                                    <div class="col-md-12 ">
+                                        View All Blogs Here...
+                                        <div class="row" ng-init="blogCtrl.blogList()">
+                                            <div class="col-md-12" style="border:2px solid #A9A9A9; border-radius:5px;">
+                                                <div ng-repeat="blogs in blogCtrl.bloglist | orderBy : '-id'">
+                                                    <div style=" margin-left: 50px;margin-top:50px; padding-top: 20px; padding-left:40px; padding-bottom:10px; margin-right: 50px;border:2px solid #A9A9A9; border-radius:5px;box-shadow: 5px 5px lightslategray">
+                                                        <h4><a href="#!/blog/{{blogs.blogId}}" style="color: rgba(0, 0, 0, 0.87);">{{blogs.blogTitle}}</a></h4>
+                                                        <footer><a href="#">By {{blogs.username}}</a></footer>
+                                                        <p>Posted on {{blogs.blogPosted | date: short}}</p>
+                                                         <blockquote><p class="truncate">{{blogs.blogContent}}</p></blockquote>
+                                                        <div class="">
+                                                            <a  href="javascript:void(0)" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="views">Views {{blogs.noOfViews}}</a>
+                                                            &nbsp; &nbsp; &nbsp;
+                                                            <a  href="javascript:void(0)" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="likes">Likes {{blogs.noOfLikes}}</a>
+                                                            &nbsp; &nbsp; &nbsp;
+                                                            <a  href="javascript:void(0)" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="comments">Comments {{blogs.noOfComments}}</a>
+                                                    
+                                                        </div>
+                                                    </div>
+                                                    <hr/>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                        <div style="margin: 25px auto 0 auto;">
+                                            <a href="#!/createblog" class="btn btn-large"><span class="glyphicon glyphicon-pencil"></span> CREATE YOUR BLOG</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

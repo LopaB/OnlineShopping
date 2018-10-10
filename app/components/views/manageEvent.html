@@ -1,0 +1,59 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                       <li ><a href="#!/events/list" role="tab" data-target="#view" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> View All Events</a></li>
+                        <li><a href="#!/event/new" role="tab" data-target="#create" data-toggle="tab"  ng-if="user.role=='ADMIN'"><span class="glyphicon glyphicon-pencil"></span> New Event</a></li>
+                        <li class="active"><a href="#!/manage/events" role="tab" data-target="#manage" data-toggle="tab"  ng-if="user.role=='ADMIN'"><span class="glyphicon glyphicon-wrench"></span> Manage Event</a></li>
+                    </ul>
+                </div>
+            <!-- Tab panes -->
+            <div class="panel-body ">
+                <div class="tab-content ">
+                    <div class="tab-pane active" id="manage ">
+                        <div class="row" ng-init="adminCtrl.fetchEventList()">
+  
+                            <div style="margin-top: 25px; margin-left: 25px;">
+                                <h5>Manage Events here...</h5>
+                            </div>
+                            <br /> <br />
+
+                            <div class="table-responsive" style="margin-left: 25px; margin-bottom: 250px;">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="id">Event Id</th>
+                                            <th data-field="name">Event Name</th>
+                                            <th data-field="postDate">Post Date</th>
+                                            <th data-field="startDate">Start Date</th>
+                                            <th data-field="endDate">End Date</th>
+                                            <th data-field="status">Options</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr ng-repeat="event in adminCtrl.eventsList">
+                                            <td>{{event.id}}</td>
+                                            <td><a href="#!" target="_blank">{{event.name}}</a></td>
+                                            <td>{{event.postDate | date: 'MMMM d, y'}}</td>
+                                            <td>{{event.startDate | date: 'MMMM d, y'}}</td>
+                                            <td>{{event.endDate | date: 'MMMM d, y'}}</td>
+                                        <td> 
+                                                
+                                                <a class="btn btn-lg tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete" ng-click="adminCtrl.deleteEvent(event.id)"><i class="fa fa-close fa" aria-hidden="true"> reject</i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div></div>

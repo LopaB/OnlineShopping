@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li><a href="#!/events/list" role="tab" data-target="#view" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> View All Events</a></li>
+                        <li  class="active"><a href="#!/event/new" role="tab" data-target="#create" data-toggle="tab"  ng-if="user.role=='ADMIN'"><span class="glyphicon glyphicon-pencil"></span> New Event</a></li>
+                        <li><a href="#!/manage/events" role="tab" data-target="#manage" data-toggle="tab"  ng-if="user.role=='ADMIN'"><span class="glyphicon glyphicon-wrench"></span> Manage Event</a></li>
+                    </ul>
+                </div>
+            <!-- Tab panes -->
+            <div class="panel-body ">
+                <div class="tab-content ">
+                    <div class="tab-pane active" id="create ">
+                        <div class=" ">
+                            <div class="row ">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8 ">
+                                   Create Event here...
+                                <hr style="width: 600px"/>
+                                    <div class="well">
+                    
+                                        <form role="form " id="newEvent" ng-submit="eventCtrl.addEvent()">
+                                            <input type="hidden" ng-model="eventCtrl.event.id" />
+                                            <div class="form-group ">
+                                                <h5>Event Name</h5>
+                                                    <input type="text " class="form-control validate" data-length="120" ng-model="eventCtrl.event.name" id="name"/>
+                                            </div>
+                                            <div class="form-group ">
+                                                <h5>Event Venue</h5>
+                                                    <input type="text " class="form-control validate" data-length="120" ng-model="eventCtrl.event.venue" id="venue"/>
+                                            </div>
+                                            <div class="form-group ">
+                                                <h5>Event Detail</h5>
+                                                <textarea class="form-control validate" rows="3 " ng-model="eventCtrl.event.description" id="description"></textarea>
+                                            </div>     
+                                            <div class="form-group ">
+                                                
+                                                <h5>Event will start from</h5>
+                                                
+                                                <datepicker style="margin-bottom:15px">
+                                                    <input type="text " class="form-control validate" data-length="120" ng-model="eventCtrl.event.startDate" id="startDate"/>
+                                                </datepicker>
+                                            </div>
+                                            
+                                            <div class="form-group ">
+                                                <h5 >Event will end on</h5>
+                                                <datepicker >
+                                                    <input type="text " class="form-control validate" data-length="120" ng-model="eventCtrl.event.endDate" id="endDate"/>
+                                                </datepicker>
+                                            </div>
+                                            
+                                                    
+                                            
+                                            <div class="form-group ">
+                            
+                                                <button type="submit "  name="say "  class="btn btn-primary " style="margin-top:40px"><i class="fa fa-reply "></i> Submit</button>
+                             
+                                            </div>
+                                        </form>
+                                    </div>
+    
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div></div></div></div></div></div>
+               

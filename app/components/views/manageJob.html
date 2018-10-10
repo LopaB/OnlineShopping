@@ -1,0 +1,57 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                       <li ><a href="#!/jobs/list" role="tab" data-target="#view" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> View All Jobs</a></li>
+                        <li><a href="#!/job/new" role="tab" data-target="#create" data-toggle="tab"  ng-if="user.role=='ADMIN'"><span class="glyphicon glyphicon-pencil"></span> New Job</a></li>
+                        <li class="active"><a href="#!/manage/jobs" role="tab" data-target="#manage" data-toggle="tab"  ng-if="user.role=='ADMIN'"><span class="glyphicon glyphicon-wrench"></span> Manage Jobs</a></li>
+                    </ul>
+                </div>
+            <!-- Tab panes -->
+            <div class="panel-body ">
+                <div class="tab-content ">
+                    <div class="tab-pane active" id="manage ">
+                        <div class="row" ng-init="adminCtrl.manageJobs()">
+  
+                            <div style="margin-top: 25px; margin-left: 25px;">
+                                <h5>Manage Jobs here...</h5>
+                            </div>
+                            <br /> <br />
+
+                            <div class="table-responsive" style="margin-left: 25px; margin-bottom: 250px;">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="id">Job Id</th>
+                                            <th data-field="subTitle">Job Title</th>
+                                            <th data-field="jobProfile">Job Profile</th>
+                                            <th data-field="pastDate">Job Posted</th>
+                                            <th data-field="status">Options</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr ng-repeat="job in adminCtrl.approvedJobList">
+                                            <td>{{job.id}}</td>
+                                            <td><a href="#!" target="_blank">{{job.subTitle}}</a></td>
+                                            <td>{{job.jobProfile}}</td>
+                                            <td>{{job.postDate | date: 'MMMM d, y'}}</td>
+                                        <td> 
+                                                
+                                                <a class="btn btn-lg tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete" ng-click="adminCtrl.deleteJob(job.id)"><i class="fa fa-close fa" aria-hidden="true"> reject</i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div></div>

@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li ><a href="#!/member/list" role="tab" data-target="#view" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> View Active Users</a></li>
+                        <li ><a href="#!/friendRequest" role="tab" data-target="#request" data-toggle="tab"><span class="glyphicon glyphicon-check"></span> Approve Friend Request</a></li>
+                        <li class="active"><a href="#!/allFriend" role="tab" data-target="#friend" data-toggle="tab"><span class="glyphicon glyphicon-list-alt"></span> All Friends</a></li>
+                    </ul>
+                </div>
+                <!-- Tab panes -->
+                <div class="panel-body ">
+                    <div class="tab-content ">              
+                        <div class="tab-pane active" id="friend ">
+                            <div class="row well">                                
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h2>All Friends</h2>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="thumbnail">
+                                                <div>
+                                                    <h2>Meet Your Firends...</h2>
+                                                    <!--User's Friendlist is shown here-->
+                                                    <div  ng-init="userCtrl.fetchMyFriends()">
+                                                        <div class="row" >
+                                                            <div class="col-md-12" >
+                                                                <div style="border:1px solid #A9A9A9;box-shadow: 5px 5px grey; border-radius: 5px;padding:10 ">
+                                                                <span >Friends (Total {{userCtrl.friendsCount}})</span>
+                                                                </div>
+                                                            </div>
+                                                        <!-- <div class="col-md-4">
+                                                                <a href="#">View All</a>
+                                                            </div>
+                                                            -->
+                                                        </div>
+                                                        <br/>
+                                                        <div class="row" >
+                                                            <div class="col-md-12">
+                                                                <div style="border:1px solid #A9A9A9; border-radius: 5px;padding-top: 10px">
+                                                                <ul class="collection">
+                                                                    <li class="collection-item" ng-repeat="friend in userCtrl.myFriends" >
+                                                                    <img src="./assets/images/{{friend.profile}}" alt="" class="img-circle" height="100" width="100" style="border: 2px solid #A9A9A9"> 
+                                                                    <span><a href="#!/user/profile/{{friend.userId}}" style="color:black">{{friend.username}}</a></span>
+                                                                
+                                                                
+                                                                    <hr/>
+                                                                    </li>                                                
+                                                                </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="thumbnail">
+                                                <div>
+                                                    <h2>Online Friends ...</h2>
+                                                    
+                                                    <!--User's Friendlist is shown here-->
+                                                    <div  ng-init="userCtrl.fetchOnlineFriends()">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div style="border:1px solid #A9A9A9;box-shadow: 5px 5px grey; border-radius: 5px;padding:10 ">
+                                                                    <span>Friends (Total {{userCtrl.countOnlineFriends}})<a></a></span>
+                                                                </div>
+                                                            </div>
+                                                        <!--    <div class="col-md-4">
+                                                                <a href="#">View All</a>
+                                                            </div> -->
+                                                        </div>
+                                                        <br/>
+                                                        <div class="row" >
+                                                            <div class="col-md-12">
+                                                                <div style="border:1px solid #A9A9A9; border-radius: 5px;padding-top: 10px">
+                                                                    <ul class="collection">
+                                                                        <li class="collection-item" ng-repeat="friend in userCtrl.myOnlineFriends">
+                                                                             <img src="./assets/images/{{friend.profile}}" alt="" class="img-circle" height="100" width="100" style="border: 2px solid #A9A9A9"> 
+                                                                            <span><a href="#!/user/profile/{{friend.userId}}" style="color:black">{{friend.username}}</a></span>
+                                                                            <a href="#!/chat/{{friend.userId}}/{{friend.username}}"  ><i class="">Chat</i></a>
+                                                                        <hr/>
+                                                                        </li>                                                
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div></div></div></div></div></div></div></div></div></div></div>

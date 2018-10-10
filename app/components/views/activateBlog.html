@@ -1,0 +1,61 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                     <ul class="nav nav-tabs" role="tablist">
+                        <li ><a href="#!/viewUsers" role="tab" data-target="#view" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> View Users</a></li>
+                        <li><a href="#!/requests/users" role="tab" data-target="#activate" data-toggle="tab"><span class="glyphicon glyphicon-user" ></span> Activate Users</a></li>
+                        <li class="active"><a href="#!/requests/blogs" role="tab" data-target="#activateBlog" data-toggle="tab"><span class="glyphicon glyphicon-biticon"></span> Activate Blog</a></li>
+                        
+                    </ul>
+                </div>
+                <!-- Tab panes -->
+                <div class="panel-body ">
+                    <div class="tab-content ">
+                        <div class="tab-pane active" id="activateBlog ">                           
+                            <div class="row ">
+                                <div class="col-md-12 ">
+                                     <div class="row" ng-init="requestCtrl.pendingBlogList()">
+                                         <div style="margin-top: 25px; margin-left: 25px;">
+                                            <h5>New Blog Requests</h5>
+                                        </div>
+                                        <br /> <br />
+                                        <div style="margin-left: 25px; margin-bottom: 250px;" class="table-responsive">
+                                            <table class="table">
+                                                 <thead>
+                                                    <tr>
+                                                        <th data-field="blogId">Blog Id</th>
+                                                        <th data-field="blogTitle">Blog Name</th>
+                                                        <th data-field="username">Author Name</th>
+                                                        <th data-field="blogPosted">Published On</th>
+                                                        <th data-field="status">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                 <tbody>
+                                                    <tr ng-repeat="blogs in requestCtrl.pendingBlogs | orderBy : 'blogId'">
+                                                        <td>{{blogs.blogId}}</td>
+                                                        <td><a href="#!/blog/{{blogs.blogId}} " target="_blank">{{blogs.blogTitle}}</a></td>
+                                                        <td>{{blogs.username}}</td>
+                                                        <td>{{blogs.blogPosted | date : 'MMMM d, y'}}</td>
+                                                        <td> 
+                                                            <div class="">                            
+                                                                <input type="button" value="Activate" ng-click="requestCtrl.changeBlogStatus(blogs.blogId)">                           
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#!/edit/profile" role="tab" data-target="#picture" data-toggle="tab"><span class="glyphicon glyphicon-upload"></span> Upload Profile Picture</a></li>
+                        <li><a href="#!/userProfile" role="tab" data-target="#info" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> User Profile Information</a></li>
+                        
+                    </ul>
+                </div>
+                <!-- Tab panes -->
+                <div class="panel-body ">
+                    <div class="tab-content ">              
+                        <div class="tab-pane active" id="picture ">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="well">
+                                        <div class="" style="text-align: center">
+                                            <span class="">Change Profile Picture</span>
+                                            <div class="row " style="text-align: center">
+                                                <img class="img-circle profile-picture" ng-src="./assets/images/{{uploadCtrl.user.profile}}" height="300" width="300" style="border: 2px solid #A9A9A9">
+                                            </div>
+                                            <div class="row " style="text-align: center">
+                                        
+                                                <div class="input-field">
+                                                    <div class="btn grey">
+                                                        <span>File</span>
+                                                        <!-- Here we are going to use our custom directive -->
+                                                        <input type="file" file-model="uploadCtrl.picture"/>
+                                                    </div>
+                                                   
+                                                </div>
+                                                <button type="submit" class="btn btn-danger" ng-click="uploadCtrl.uploadFile()">Change Picture</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

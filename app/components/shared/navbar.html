@@ -1,0 +1,50 @@
+<div ng-if="authenticated">
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+        <a class="navbar-brand" href="#"> OPPORTUNITY COLLABORATION</a>
+        </div>
+    
+    
+        <ul class="nav navbar-nav">
+            <li class="active" ng-if="user.role=='USER'">                
+                <a class="" href="#!/home" >Home  <span class="sr-only"></span></a>
+            </li>
+            <li class="active" ng-if="user.role=='ADMIN'">    
+                <a class="" href="#!/homeAdmin">Home  <span class="sr-only"></span></a>
+            </li>
+            <li class="">
+                <a class="" href="#!/blog">Blog</a>
+            </li>
+            <li class="">
+                <a class="" href="#!/forum/list">Forum</a>
+            </li>
+            <li class="">
+                <a class="" href="#!/edit/profile">Profile</a>
+            </li>
+            <li class="">
+                <a class="" href="#!/jobs/list">Job</a>
+            </li>
+            <li class="">
+                <a class="" href="#!/events/list">Event</a>
+            </li>
+            <li class="" >
+                <a class="" href="#!/member/list">Friend</a>
+            </li>
+           <li class="" ng-if="user.role=='ADMIN'">
+                <a class="" href="#!/viewUsers" >Manage</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="">          
+                
+                    <a>   {{message}}  </a>    
+                
+            </li>
+            <li class="">
+                <a class="" href="" ng-click="logout()">Logout</a>
+            </li>
+        </ul>
+    </div> 
+</nav>
+</div>

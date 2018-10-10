@@ -1,0 +1,114 @@
+
+<div class="container">
+    <div class="row ">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#!/forum/list" role="tab" data-target="#view" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> View Forums</a></li>
+                        <li><a href="#!/requests/forums" role="tab" ng-if="user.role=='ADMIN'" data-target="#request" data-toggle="tab"><span class="glyphicon glyphicon-bitcoin"></span> Approve Forum</a></li>
+                        <li><a href="#!/manage/forums" role="tab" ng-if="user.role=='ADMIN'" data-target="#activateBlog" data-toggle="tab"><span class="glyphicon glyphicon-bitcoin"></span> Manage Forum</a></li>
+                        
+                    </ul>
+                </div>
+                <!-- Tab panes -->
+                <div class="panel-body ">
+                    <div class="tab-content ">
+                        <div class="tab-pane active" id="view " >
+                            <div class="row" ng-init="forumCtrl.fetchForums()">
+                                <div class="col-md-9">
+                                    <div style="margin-bottom: 50px;">
+                                       
+                                        <h4>Forums List</h4>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row" style="width: 900px;" ng-repeat="forums in forumCtrl.forums | orderBy : 'id' : reverse">
+                                                    <div class="col-md-6" style="margin-left: 10px; padding-top: 40px; padding-left:40px;padding-bottom:10px; margin-right: 50px;border:2px solid #A9A9A9; border-radius:5px;">
+                                                        <a ng-href="#!/forum/{{forums.id}}"><span style=" color: rgba(0, 0, 0, 0.87);"> {{forums.name}}</span></a>
+                                                        <div >
+                                                            <p>{{forums.description}}</p>
+                                                        </div>
+                                                        <div >
+                                                            <a class="btn btn-danger" data-position="bottom" ng-click="forumCtrl.joinRequest(forums.id)" data-delay="50" data-tooltip="Join Forum"><i class="material-icons">add</i></a>
+                                                        </div>
+                                                      </div>  
+                                                </div>
+                                            </div>
+                                        </div> 
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3" style="margin-bottom: 50px;">
+                                    
+
+                                    <div style="margin: 25px auto 0 auto; " ng-if="user.role != 'USER'">
+                                        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-info btn-lg">CREATE FORUM</button>
+                                    </div>
+
+                                    <div id="myModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4>Create New Forum</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <form id="newForum" name="newForum" ng-submit="forumCtrl.addForum()" class="col s12" style="padding-bottom: 40px;">
+                                                                <input type="hidden" ng-model="forumCtrl.Forum.id" />
+
+                                                                <!--forum name will come here-->
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-12">
+                                                                        <input id="name" type="text" class="form-control validate" data-length="50" ng-model="forumCtrl.Forum.name">
+                                                                        <label for="title">Forum Name</label>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!--forum description will come here-->
+                                                                <div class="row" >
+                                                                    <div class="form-group col-md-12">
+                                                                        <textarea id="description" class="form-control" ng-model="forumCtrl.Forum.description"></textarea>
+                                                                        <label for="description">Forum Description</label>
+                                                                    </div> 
+                                                                </div>
+
+                                                                <!--Submit button will come here-->
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-12">
+                                                                        <button type="submit" class="btn btn-large" style="margin-top: 10px; left: 10px;">Create</button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                                                                <div class="btn-group" role="group">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                        <!-- end of modal-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        
+                            
+                            

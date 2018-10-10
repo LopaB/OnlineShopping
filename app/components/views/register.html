@@ -1,0 +1,181 @@
+<div class="container">
+	<div class="row">
+	<div class="topNavWrapper" style="padding-top: 10px">
+                    <a href=""><img src="./assets/images/logo.jpg" height="60" width="150" alt="eLearnzCampus"/></a>
+                    <div class="loginWrap" style="padding-bottom: 10px">
+                        <div class="login">
+                            <a href="#!/login" title="Click here to login"><span class="glyphicon glyphicon-user" aria-hidden="true" style="padding-right:2px "></span>   login</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mainMenu">
+                    <ul>
+                        <li><a href="#!/about"> about us</a></li>
+                        <li><a href="#!/contact"> contact us</a></li>
+                        <li class="active"><a href="#!/register"> register here</a></li>
+                    </ul>
+                </div>
+</div>
+	<div class="row"  style="background-color:powderblue ">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<div class="row main">
+				<div class="col-md-12">
+				<div class="form-container">
+				<h1  style="text-align: center">Create an account</h1>
+				<h4  style="text-align: center">Complete form below to sign up for our service</h4>
+				<br/>
+			
+					<form class="" method="post" action="#" id="register" name="register"  novalidate>
+						<input type="hidden" ng-model="ragCtrl.user.userId" />
+						<div class="form-group">
+							<div class="alert alert-success" ng-if="regCtrl.message!=''">
+                           		{{regCtrl.message}}
+                        	</div>
+						</div>
+
+						<!-- Username -->
+						<div class="form-group">
+							<label for="username" class="cols-sm-2 control-label">Username</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+									<input type="text" ng-model="regCtrl.user.username" class="form-control validate" ng-minlength="3" ng-maxlength="10" name="username" id="username"  placeholder="Enter Username"  data-length="10" ng-blur="regCtrl.checkUsername()" ng-required="true"/>
+								</div>
+								<div class="invalid-data" ng-show="register.username.$dirty">
+                    				<span style="color:red" ng-show="regCtrl.usernameExist" class="help-block">Username is already taken</span>
+                    				<span style="color:red" ng-show="register.username.$error.required && !register.username.$pristine" class="help-block">Username is mandatory</span>
+                    				<span style="color:red" ng-show="register.username.$error.minlength" class="help-block">Username must be of at least 3 characters</span>
+                    				<span style="color:red" ng-show="register.username.$error.maxlength" class="help-block">Username is too long</span>
+                  				</div>
+							</div>
+						</div>
+
+                        
+						<!-- Password -->
+						<div class="form-group">
+							<label for="password" class="cols-sm-2 control-label">Password</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="password" ng-model="regCtrl.user.password" class="form-control validate" ng-minlength="4" ng-maxlength="10" name="password" id="password"  placeholder="Enter Password" data-length="10" ng-required="true"/>
+								</div>
+								<div class="invalid-data" ng-show="register.password.$dirty">
+                    				<p style="color:red" ng-show="register.password.$error.required && !register.password.$pristine" class="help-block">password is mandatory</p>
+                    				<p style="color:red" ng-show="register.password.$error.minlength" class="help-block">password must be of at least 4 characters</p>
+                    				<p style="color:red" ng-show="register.password.$error.maxlength" class="help-block">password is too long</p>
+                  				</div>
+							</div>
+						</div>
+						<!-- Confirm Password -->
+						<div class="form-group">
+							<label for="confirmpassword" class="cols-sm-2 control-label">Confirm Password</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="password" ng-model="regCtrl.user.confirmpassword" class="form-control" name="confirmpassword" id="confirm"  placeholder="Confirm Password"  data-length="10" ng-required="true" ng-class="{ 'confirmpassword' : (regCtrl.user.password !== regCtrl.user.confirmpassword)}"/>
+								</div>
+								<div class="invalid-data" ng-show="register.reg_username.$dirty">
+        							<p style="color:red" ng-show="register.confirmpassword.$error.required && !register.confirmpassword.$pristine" class="help-block">password is mandatory</p>
+                    				<p style="color:red" ng-show="(!register.confirmpassword.$error.required) && (regCtrl.user.password !== regCtrl.user.confirmpassword)"
+                      					class="help-block">Password do not match</p>
+                  				</div>
+							</div>
+						</div>
+						<!-- Fullname -->
+						<div class="form-group">
+							<label for="fullname" class="cols-sm-2 control-label">Full Name</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<input type="text" ng-model="regCtrl.user.fullname" class="form-control validate" name="fullname" id="fullname"  placeholder="Enter Full Name" data-legth="25" ng-minlength="2" ng-maxlength="25" ng-required="true"/>
+									
+								</div>
+								<div class="invalid-data" ng-show="register.fullname.$dirty">
+                    					<p style="color:red" ng-show="register.fullname.$error.required && !register.first_name.$pristine" class="help-block">first name is mandatory</p>
+                    					<p style="color:red" ng-show="register.fullname.$error.minlength" class="help-block">firstname must be of at least 2 characters</p>
+                    					<p style="color:red" ng-show="register.fullname.$error.maxlength" class="help-block">firstname is too long</p>
+                  				</div>
+							</div>
+						</div>
+						<!-- Email -->
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">Email</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<input type="text" ng-model="regCtrl.user.email" class="form-control validate" name="email" id="email"  placeholder="Enter Email Id" data-length="50" ng-required="true"/>
+								</div>
+								<div class="invalid-data" ng-show="register.email.$dirty">
+                  					<p style="color:red" ng-show="register.email.$error.required && !register.email.$pristine" class="help-block">email is mandatory</p>
+                  					<p style="color:red" ng-show="register.email.$invalid && !register.email.$pristine" class="help-block">Enter a valid email</p>
+                				</div>
+							</div>
+						</div>
+						
+
+						<!-- Gender -->
+						<div class="form-group">
+							<label for="gender" class="cols-sm-2 control-label">Gender</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-intersex fa" aria-hidden="true"></i></span>
+									<select name="gender" id="gender" ng-model="regCtrl.user.gender" ng-required="true" class="form-control">
+										<option value="" disabled selected>Choose a gender</option>
+                  						<option value="M">Male</option>
+                  						<option value="F">Female</option>
+									</select>
+								</div>
+								
+							</div>
+						</div>
+
+						<!-- Role -->
+						<div class="form-group">
+							<label for="role" class="cols-sm-2 control-label">Role</label>
+							<div class="cols-sm-10 ">
+								<div class="input-group" style="background-color: white;border-radius: 3px ">
+									<span class="input-group-addon" ><i class="fa fa-vcard-o fa" aria-hidden="true" ></i></span>
+									
+									<label class="radio-inline" style="padding-left:10% ;padding-top: 1% "><input type="radio" name="role" ng-model="regCtrl.user.role" value="ADMIN"/> ADMIN</label>
+									<label class="radio-inline" style="padding-left:10%;padding-top: 1% "><input type="radio" name="role" ng-model="regCtrl.user.role" value="USER" checked/> USER</label>
+									
+									
+									
+									<!--<select name="role" id="role" ng-model="regCtrl.user.gender" ng-required="true" class="form-control">
+										<option value="" disabled selected>Choose a role</option>
+                  						<option value="USER">USER</option>
+                  						<option value="ADMIN">ADMIN</option>
+									</select>-->
+								</div>
+								
+							</div>
+						</div>
+
+						
+
+						<div class="form-group ">
+                            <input type="button"  value="Register" ng-click="regCtrl.register() && register.$valid"  class="btn btn-primary btn-lg btn-block login-button"/>
+							
+						</div>
+
+                        <div>
+						<small style="text-align: center">By Registering you agree with our terms and conditions</small>
+                        <p style="font-size: 10px; color: red" ng-hide="register.$invalid">Please note user will be able to login only after admin's approval which generally takes 24 hours.</p>   
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+ 
+                        </div>
+						
+					</form>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,58 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li><a href="#!/blog" role="tab" data-target="#view" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> View Blog</a></li>
+                        <li><a href="#!/myblog" role="tab" data-target="#myblog" data-toggle="tab"><span class="glyphicon glyphicon-list-alt" ></span> My Blog</a></li>
+                        <li  class="active"><a href="#!/createblog" role="tab" data-target="#create" data-toggle="tab"><span class="glyphicon glyphicon-pencil"></span> Create Blog</a></li>
+                        <li><a href="#!/manageblog" role="tab" data-target="#manage" data-toggle="tab"  ng-if="user.role=='ADMIN'"><span class="glyphicon glyphicon-wrench"></span> Manage Blog</a></li>
+                    </ul>
+                </div>
+            <!-- Tab panes -->
+            <div class="panel-body ">
+                <div class="tab-content ">
+                    <div class="tab-pane active" id="create ">
+                        <div class=" ">
+                            <div class="row ">
+                                <div class="col-md-12 ">
+                                    Write Blog here
+                                
+                                    <div class="well ">
+                    
+                                        <form role="form " id="newBlog" ng-submit="blogCtrl.addBlog()">
+                                            <input type="hidden" ng-model="blogCtrl.blog.blogId" />
+                                            <div class="form-group ">
+                                                <h5>Blog post title</h5>
+                                                    <input type="text " class="form-control validate" data-length="120" ng-model="blogCtrl.blog.blogTitle" id="blogTitle"/>
+                                            </div>
+                                            
+                                            <div class="form-group ">
+                                                <h5>Blog post content</h5>
+                                                <textarea class="form-control validate" rows="5 "  ng-model="blogCtrl.blog.blogContent" id="blogContent"></textarea>
+                                                <script>
+                                                    // Replace the <textarea id="editor1"> with a CKEditor
+                                                    // instance, using default configuration.
+                                                    CKEDITOR.replace( 'blogContent' );
+                                                </script>
+                                            </div>
+                                                             
+                        
+                                            <div class="form-group ">
+                             
+                                                <button type="submit "  name="say "  class="btn btn-primary "><i class="fa fa-reply "></i> Submit</button>
+                             
+                                            </div>
+                                        </form>
+                                    </div>
+    
+                                <!--blog write end-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div></div></div></div></div></div>
+               

@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                     <ul class="nav nav-tabs" role="tablist">
+                        <li><a href="#!/forum/list" role="tab" data-target="#view" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> View Forums</a></li>
+                        <li class="active"><a href="#!/requests/forums" ng-if="user.role=='ADMIN'" role="tab" data-target="#request" data-toggle="tab"><span class="glyphicon glyphicon-bitcoin"></span> Approve Forum</a></li>
+                        <li><a href="#!/manage/forums" role="tab" ng-if="user.role=='ADMIN'" data-target="#manage" data-toggle="tab"><span class="glyphicon glyphicon-bitcoin"></span> Manage Forum</a></li>
+                        
+                    </ul>
+                </div>
+                <!-- Tab panes -->
+                <div class="panel-body ">
+                    <div class="tab-content ">
+                        <div class="tab-pane active" id="request ">                           
+                            <div class="row ">
+                                <div class="col-md-12 ">
+                                     <div class="row" ng-init="requestCtrl.fetchForumRequests()">
+                                         <div style="margin-top: 25px; margin-left: 25px;">
+                                            <h5>New Blog Requests</h5>
+                                        </div>
+                                        <br /> <br />
+                                        <div style="margin-left: 25px; margin-bottom: 250px;" class="table-responsive">
+                                            <table class="table">
+                                                 <thead>
+                                                    <tr>
+                                                       
+                                                        <th data-field="name">Forum Name</th>
+                                                        <th data-field="username">Author Name</th>
+                                                       
+                                                        <th data-field="status">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                 <tbody>
+                                                    <tr ng-repeat="request in requestCtrl.forumRequest | orderBy : 'id'">
+                                                       
+                                                        <td><a href="#!/forum/{{request.forum.id}} " >{{request.forum.name}}</a></td>
+                                                        <td>{{request.username}}</td>
+                                                        
+                                                        <td> 
+                                                            <div class="">                            
+                                                                <input type="button" value="Activate" ng-click="requestCtrl.changeFRStatus(request.id)">                           
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1 @@
+var app=angular.module("CollaborationApp",['ngRoute','ngCookies','720kb.datepicker','UploadModule']);

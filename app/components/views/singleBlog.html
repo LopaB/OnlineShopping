@@ -1,0 +1,125 @@
+
+<div class="container">
+    <div class="row well">
+        <div class="col-md-12 ">   
+
+            <div  ng-init="blogCtrl.viewSingleBlog()">
+                <div style="margin-left: 20px; padding-top: 20px;  margin-right: 20px;">
+                    <div ng-if="blogCtrl.singleBlog.status == 'PENDING'">
+                        <div class="" style="background-color: #A9A9A9">
+                            <marquee><span style="color: #fff; padding-left: 25px;">This blog's approval is still pending. Only you can see this blog. Once admin approves the blog 
+                                it will go online and you will be notified!</span></marquee>
+                        </div>
+                    </div>
+                    <div style="border:2px solid #A9A9A9 ; border-radius: 5px; padding-left:30px">
+                        <h4>{{blogCtrl.singleBlog.blogTitle}}</h4>  <!--Controllername.objectname.field -->
+                        <p>Published By {{blogCtrl.singleBlog.username}} | {{blogCtrl.singleBlog.blogPosted | date: 'MMMM d, y'}}</p>
+                        <blockquote><p>{{blogCtrl.singleBlog.blogContent}}</p></blockquote>
+
+                        <a ng-if="blogCtrl.singleBlog.status == 'APPROVED'" class=""  ng-click="blogCtrl.likes(blogCtrl.singleBlog.blogId);"><i class="fa fa-thumbs-up fa"></i></a>
+                
+
+                        <hr/>
+
+                        <!-- Blog Comments starts here -->
+            
+                        <!-- Display this if no comments are available -->
+                        <div  ng-if="blogCtrl.singleBlog.noOfComments == 0 ">
+                            
+                                <h5 style="padding-top: 25px; padding-left: 30px;">No Comments Yet!</h5>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Display this if comments are available -->
+            <div ng-if="blogCtrl.singleBlog.noOfComments != 0 " style="padding-top: 20px; margin-bottom: 50px;margin-left: 20px; padding-top: 20px;  margin-right: 20px;">
+                <div style="border:2px solid #A9A9A9 ; border-radius: 5px; padding-left:30px">
+                    <h5><b>Comments ({{blogCtrl.singleBlog.noOfComments}})</b></h5>
+                        <div class="row" ng-repeat="blogComment in blogCtrl.blogCommentList| orderBy : 'id'">
+                            <div class="">
+                                <div style=" padding-top: 40px; padding-bottom: 40px; padding-left: 40px;padding-right: 40px">
+                                    <div class="row">
+                                        <div class="" style="margin-top: 20px">
+                                            <img src="./assets/images/{{blogCtrl.user.profile}}" alt="" class="img-circle" width="80px" height="80px" style="border: 2px solid #A9A9A9"> 
+                                            </div>
+                                            <div class="">
+                                                <h4 >{{blogComment.title}}</h4>
+                                                <p >Commented by {{blogComment.username}} | Posted on : {{blogComment.commentDate | date : 'MMMM d, y'}}</p>
+                                            </div>
+                                        </div>
+                                        <p class="bg-warning" style="margin-left: 20px; margin-right: 10px;">{{blogComment.blogComment}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Section for leaving comment on blogs will come here-->
+                    <div ng-if="blogCtrl.singleBlog.status == 'APPROVED'" style="padding-top: 20px; margin-bottom: 50px;margin-left: 20px; padding-top: 20px;  margin-right: 20px;">
+                        <div style="border:2px solid #A9A9A9 ; border-radius: 5px; padding-left:30px">
+                            <h4>Leave a comment</h4>
+                                <form id="newBlogComment" name="newBlogComment" ng-submit="blogCtrl.addBlogComment()">
+                                    <input type="hidden" ng-model="blogCtrl.blogComment.blogCommentId" />
+                                    <input type="hidden" ng-model="blogCtrl.blogComment.blogId" />
+
+                                    <div class="row">
+                                        <div class="input-field col-md-4">
+                                            <input id="title" type="text" class="form-control validate" ng-model="blogCtrl.blogComment.title">
+                                            <label for="title">Title</label>
+                                        </div>
+                                    </div>
+
+                                  
+                                        <div class="row">
+                                            <div class="input-field col-md-6">
+                                                <textarea id="comment" class="form-control" ng-model="blogCtrl.blogComment.blogComment"></textarea>
+                                                <label for="comment">Comment</label>
+                                            </div>
+                                        </div>
+                                  
+
+                                    <div class="row">
+                                         <div class="input-field col-md-4">
+                                        <button type="submit" class="btn btn-md btn-primary" style="margin-top: 10px; left: 20px;">Post</button>
+                                         </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                           
+    
+                        <div class="col-md-12">
+        
+        
+
+        <!-- Likes, views count will come here -->
+        <div style="border: 2px solid #A9A9A9; height: 100px; border-radius: 5px;text-align: center" >
+            <div style="margin-top: 10px;margin-bottom: 10px; padding-left:30px">
+                <a ng-if="blogCtrl.singleBlog.noOfLikes != 1" href="#!" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="likes" 
+                        style="color: #4db6ac; font-size: 20px;">
+                            {{blogCtrl.singleBlog.noOfLikes}} Likes
+                        </a>
+                <a ng-if="blogCtrl.singleBlog.noOfLikes == 1" href="#!" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="likes" 
+                        style="color: #4db6ac; font-size: 20px;">
+                            {{blogCtrl.singleBlog.noOfLikes}} Like
+                        </a>
+            </div>
+
+            <div style="margin-top: 10px;margin-bottom: 10px; padding-left:30px; text-align: center">
+                <a href="#!" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="views" 
+                        style="color: #4db6ac; font-size: 20px;">
+                        {{blogCtrl.singleBlog.noOfViews}} Views
+                    </a>
+            </div>
+        </div>
+
+        <div style="margin: 25px auto 0 auto;">
+            <a href="#!/createblog" class="btn btn-large"><i class=""></i>CREATE YOUR BLOG</a> | <a href="#!/blog" class="btn btn-large"><i class=""></i>VIEW BLOG</a>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+</div>

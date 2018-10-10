@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#!/jobs/list" role="tab" data-target="#view" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> View All Jobs</a></li>
+                        <li><a href="#!/job/new" role="tab" data-target="#create" data-toggle="tab"  ng-if="user.role=='ADMIN'"><span class="glyphicon glyphicon-pencil"></span> New Job</a></li>
+                        <li><a href="#!/manage/jobs" role="tab" data-target="#manage" data-toggle="tab"  ng-if="user.role=='ADMIN'"><span class="glyphicon glyphicon-wrench"></span> Manage Jobs</a></li>
+                    </ul>
+                </div>
+                <!-- Tab panes -->
+                <div class="panel-body ">
+                    <div class="tab-content ">              
+                        <div class="tab-pane active" id="view ">
+                            <div class=" ">
+                                <div class="row well">
+                                    <div class="col-md-12 ">
+                                        View All Jobs Here...
+                                        <div class="row" ng-init="jobCtrl.joblist()">
+                                            <div class="col-nd-9" style="border:2px solid #A9A9A9; border-radius:5px;">
+                                                <div ng-repeat="job in jobCtrl.joblist">
+                                                    <div style=" margin-left: 50px;margin-top:50px; padding-top: 40px; padding-left:40px;padding-bottom:10px; margin-right: 50px;border:2px solid #A9A9A9; border-radius:5px;">
+                                                        <h4>{{job.subTitle}}</h4>
+                                                         <p style="font-size: 13px;"> {{job.companyName}} </p><br>
+                                                         <p>JOB PROFILE: &nbsp; {{job.jobProfile}}</p>
+                                                         <p> ABOUT THE JOB: &nbsp; {{job.about}}</p>
+                                                         <p>QUALIFICATION: &nbsp; {{job.qualification}}</p>
+                                                         <p style="color:red">CONTACT HERE: &nbsp; {{job.contactInfo}}</p>
+                                                         <p>Posted on : {{job.postDate| date: short}}</p>
+                                                         <button  ng-click="jobCtrl.applyJob(job.id);" class="btn btn-md btn-danger tooltipped"  data-position="bottom" data-delay="50" data-tooltip="APPLY JOB">Join</button>
+                                                        
+                                                    </div>
+                                                    <hr/>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

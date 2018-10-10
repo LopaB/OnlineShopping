@@ -1,0 +1,124 @@
+<div class="container">
+    <div class="row ">
+        <div class="col-md-12">
+           <div class="row" ng-init="forumCtrl.viewForum()">                        
+                <div class="col-md-12" style="margin-top: 25px;">
+                    <div style=" padding-top: 20px; padding-bottom: 20px;">
+                        <div class="row">                            
+                            <div class="col-md-6">                                
+                                <div class="row" ng-if="!forumCtrl.isParticipant">
+                                    <div class="col-md-12" style="background-color: #ff0000">
+                                            <span style="color: white; padding-left: 20px;">You are not a participant of this thread. Join the forum to post and to view posts of others</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8" ng-if=" ((user.userId != forumCtrl.singleForum.userId) && !forumCtrl.isParticipant)" >
+                                        <a class="btn btn-danger" ng-click="forumCtrl.joinRequest(forumCtrl.singleForum.id)">JOIN FORUM</a>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="(forumCtrl.isParticipant) && forumCtrl.participantStatus == 'PENDING'">
+                                    <div class="col-md-12" style="background-color: #ff0000">
+                                        <marquee><span style="color: white; padding-left: 20px;">Your request to join the forum has been submitted successfully and awaiting response from admin after approval of which you will get full access to the forum.</span></marquee>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-md-6">
+                                <!-- If no posts are available -->
+                                <div ng-if="((forumCtrl.singleForum.noOfPosts == 0) && forumCtrl.isApproved)">
+                                    <div class="" style="height: 250px;">
+                                        <h3 style="padding-top: 75px; padding-left: 20px;">No Posts Yet!</h3>
+                                    </div>
+                                </div>
+                                <!-- If posts are available -->
+                                <div ng-if="(forumCtrl.isApproved) && forumCtrl.singleForum.noOfPosts != 0">
+                                    <div class="" ng-repeat="post in forumCtrl.forumPostsList | orderBy : 'id'">
+                                        <div style=" padding-top: 20px; padding-bottom: 20px;" >
+                                            <div class="row">
+                                                <div class="col-md-3" style="margin-top: 20px;" >
+                                                    <img src="./assets/images/{{post.userProfileId}}" alt="" class="img-circle" width="100px;">
+                                                    <p>Posted by: {{post.username}}</p>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <h4>{{post.title}}</h4>
+                                                    <p>On {{post.postDate | date: 'MMMM d, y'}}</p>
+                                                    <p>{{post.description}} </p>
+                                                </div>
+                                            </div>
+                                            <hr style="width:450px;background-color: #fff;border-top: 2px dotted #8c8b8b;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            
+
+                            <div class="col-md-6" style="padding-left:20px;border-left: 2px dotted #8c8b8b;">
+                                <div class="row">
+                                    <div class="col-md-12" style="margin-top: 20px; ">
+                                        <img ng-src="./assets/images/{{forumCtrl.singleForumUser.profile}}" alt="" class="img-circle" width="100px;">
+                                        <p>Started by: {{forumCtrl.singleForum.username}}</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h4>{{forumCtrl.singleForum.name}}</h4>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>Posted on: {{forumCtrl.singleForum.postDate | date: 'MMMM d, y'}}</p>
+                                        <p>{{forumCtrl.singleForum.description}}</p>
+                                        <a ng-if= "forumCtrl.isParticipant && forumCtrl.isApproved" class="btn brn-danger" data-target="#leaveAPost" data-toggle="modal" class="btn btn-primary"  data-position="bottom" data-delay="50" data-tooltip="Reply To This Thread">Post</a>
+                                                                    
+                                        <!-- Modal Structure for submitting forum post-->
+                                        <div id="leaveAPost" class="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content" >
+                                                    <div class="modal-header">
+                                                        <h4>Leave a Post</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <form id="newForumPost" name="newForumPost" ng-submit="forumCtrl.addForumPost()"  style="margin-bottom: 50px;">
+                                                                    <input type="hidden" ng-model="forumCtrl.ForumPost.id" />
+
+                                                                    <div class="row">
+                                                                        <div class="form-group col-md-12">
+                                                                            <input id="title" type="text" class="form-control validate" ng-model="forumCtrl.ForumPost.title">
+                                                                            <label for="title">Title</label>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">                                                                        
+                                                                        <div class="form-group col-md-12">
+                                                                            <textarea id="comment" class="form-control" ng-model="forumCtrl.ForumPost.description"></textarea>
+                                                                            <label for="comment">Comment</label>
+                                                                        </div>
+                                                                    </div>                                                                   
+
+                                                                    <div class="row">
+                                                                        <div class="form-group col-md-12">
+                                                                            <button type="submit" class="btn btn-primary" style="margin-top: 10px; left: 20px;">Post</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end of modal -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                    </div>
+                </div>                        
+            </div>                   
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#!/events/list" role="tab" data-target="#view" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> View All Events</a></li>
+                        <li><a href="#!/event/new" role="tab" data-target="#create" data-toggle="tab"  ng-if="user.role=='ADMIN'"><span class="glyphicon glyphicon-pencil"></span> New Event</a></li>
+                        <li><a href="#!/manage/events" role="tab" data-target="#manage" data-toggle="tab"  ng-if="user.role=='ADMIN'"><span class="glyphicon glyphicon-wrench"></span> Manage Event</a></li>
+                    </ul>
+                </div>
+                <!-- Tab panes -->
+                <div class="panel-body ">
+                    <div class="tab-content ">              
+                        <div class="tab-pane active" id="view ">
+                            <div class=" ">
+                                <div class="row well">
+                                    <div class="col-md-12 ">
+                                        View All Events Here...
+                                        <div class="row" ng-init="eventCtrl.eventlist()">
+                                            <div class="col-nd-9" style="border:2px solid #A9A9A9; border-radius:5px;">
+                                                <div ng-repeat="event in eventCtrl.eventlist">
+                                                    <div style=" margin-left: 50px;margin-top:50px; padding-top: 40px; padding-left:40px;padding-bottom:10px; margin-right: 50px;border:2px solid #A9A9A9; border-radius:5px;">
+                                                        <h4>{{event.name}}</h4>
+                                                         <p style="font-size: 13px;">Organised between {{event.startDate | date: short}} to {{event.endDate | date: short}}</p><br>
+                                                         <blockquote><p class="truncate">{{event.description}}</p></blockquote>
+                                                         <p>Posted on : {{event.postDate| date: short}}</p>
+                                                         <button  ng-click="eventCtrl.joinEvent(event.id);" class="btn btn-md btn-danger tooltipped"  data-position="bottom" data-delay="50" data-tooltip="JOIN EVENT">Join</button>
+                                                        
+                                                    </div>
+                                                    <hr/>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

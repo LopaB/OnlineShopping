@@ -1,0 +1,71 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#!/member/list" role="tab" data-target="#view" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> View Active Users</a></li>
+                        <li><a href="#!/friendRequest" role="tab" data-target="#request" data-toggle="tab"><span class="glyphicon glyphicon-check"></span> Approve Friend Request</a></li>
+                        <li><a href="#!/allFriend" role="tab" data-target="#friend" data-toggle="tab"><span class="glyphicon glyphicon-list-alt"></span> All Friends</a></li>
+                    </ul>
+                </div>
+                <!-- Tab panes -->
+                <div class="panel-body ">
+                    <div class="tab-content ">              
+                        <div class="tab-pane active" id="view ">
+                            <div class="row well">
+                                <div class="col-md-12">
+                                    <div style="margin: 25px; margin-left: 20px; margin-bottom: 50px;" ng-init="friendCtrl.fetchusers()">
+                                        <h5>LOOK FOR NEW PEOPLE TO BEFRIEND</h5>Currently active users {{friendCtrl.countuser}}
+                                        <hr>
+                                        <!-- Search bar comes here -->
+                                        <div  style="margin-left: 50px">
+                                        <form>
+                                            <div class="form-group">
+                                                 <label class="label-icon" for="search" style="font-size: 12px"><i class="fa fa-search fa"></i></label>
+                                                    
+                                            <input id="search" type="search" required style="display: inline" placeholder="Search for friend" ng-model="SearchBox">
+                                                   
+                                            </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                        <!-- List of all site's members will come here-->
+                                        
+                                            <div class="row well" >
+                                                
+                                                <div class="col-md-6" ng-repeat="user in friendCtrl.userlist | filter : SearchBox" style="text-align: center; padding-bottom: 5%; padding-left:5%; padding-right:5%;">
+
+                                                    
+                                                        <div class="row " style="border:2px solid #A9A9A9; border-radius: 5px; box-shadow: 5px 5px lightslategray">
+                                                            <div class="col-md-3" style="margin-top: 10px;">
+                                                                <img src="./assets/images/{{user.profile}}" alt="" class="img-circle" width="120px;" height="120px;" style="border: 2px solid #A9A9A9"> 
+                                                            </div>
+                                                            <div class="col-md-8 offset-s1" style="margin-top: 10px; margin-bottom: 10px;">
+                                                                <b><a href="" style="color: #000;">{{user.fullname}}</a></b> <!--#!/user/profile/{{user.userId}}-->
+                                                                <p style="margin-top: 0px; margin-bottom: 0px;">{{user.username}}</p>
+                                                               <!-- <p style="margin-top: 0px; margin-bottom: 0px;">{{user.birthDate | date : 'MMMM, d y'}}</p> -->
+                                                                <p ng-if="user.gender == 'M'" style="margin-top: 0px; margin-bottom: 0px;">Male</p>
+                                                                <p ng-if="user.gender == 'F'" style="margin-top: 0px; margin-bottom: 0px;">Female</p>
+                                                                <button ng-if="!friendCtrl.sentrequest" class="btn" ng-click="friendCtrl.sendRequest(user.userId)">Add Friend</button>
+                                                                <button ng-if="friendCtrl.sentrequest" class="btn disabled" ng-click="friendCtrl.sendRequest(user.userId)">Add Friend</button>
+                                                            </div>
+                                                        
+                                                        </div>
+                                                    </div>
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

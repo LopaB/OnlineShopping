@@ -1,0 +1,57 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li><a href="#!/blog" role="tab" data-target="#view" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> View Blog</a></li>
+                        <li><a href="#!/myblog" role="tab" data-target="#myblog" data-toggle="tab"><span class="glyphicon glyphicon-list-alt" ></span> My Blog</a></li>
+                        <li ><a href="#!/createblog" role="tab" data-target="#create" data-toggle="tab"><span class="glyphicon glyphicon-pencil"></span> Create Blog</a></li>
+                        <li  class="active"><a href="#!/manageblog" role="tab" data-target="#manage" data-toggle="tab"  ng-if="user.role=='ADMIN'"><span class="glyphicon glyphicon-wrench"></span> Manage Blog</a></li>
+                    </ul>
+                </div>
+            <!-- Tab panes -->
+            <div class="panel-body ">
+                <div class="tab-content ">
+                    <div class="tab-pane active" id="manage ">
+                        <div class="row" ng-init="adminCtrl.approvedBlogList()">
+  
+                            <div style="margin-top: 25px; margin-left: 25px;">
+                                <h5>Manage your blogs here</h5>
+                            </div>
+                            <br /> <br />
+
+                            <div class="table-responsive" style="margin-left: 25px; margin-bottom: 250px;">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="id">Blog Id</th>
+                                            <th data-field="name">Blog Title</th>
+                                            <th data-field="authorname">Author Name</th>
+                                            <th data-field="date">Published On</th>
+                                            <th data-field="status">Options</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr ng-repeat="blog in adminCtrl.approvedBlogList">
+                                            <td>{{blog.blogId}}</td>
+                                            <td><a href="#!/blog/{{blog.blogId}}" target="_blank">{{blog.blogTitle}}</a></td>
+                                            <td>{{blog.username}}</td>
+                                            <td>{{blog.blogPosted | date: 'MMMM d, y'}}</td>
+                                        <td> 
+                                                <a class="btn btn-lg tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete" ng-click="adminCtrl.deleteBlog(blog.blogId)"><i class="fa fa-close fa" aria-hidden="true"> reject</i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div></div>
